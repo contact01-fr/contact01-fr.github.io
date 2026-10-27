@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://contact01-fr.github.io/sitemap.xml

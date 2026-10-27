@@ -1,0 +1,3 @@
+# Maquette Vitrio : ne pas indexer (ce n'est pas le site officiel du commerce)
+User-agent: *
+Disallow: /
