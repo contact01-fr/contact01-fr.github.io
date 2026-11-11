@@ -21,7 +21,7 @@
 <meta name="theme-color" content="#0f1620">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="preconnect" href="https://fonts.bunny.net">
-<link rel="stylesheet" href="https://fonts.bunny.net/css?family=bodoni-moda:400,500,600,400i,500i|jost:400,500,600|young-serif:400|dm-sans:400,500,600,700|archivo:400,600,800,900&display=swap">
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=archivo:400,600,800,900&display=swap">
 <link rel="stylesheet" href="style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Vitrio","description":"Aide les artisans et commerçants à avoir plus de clients et de demandes de devis grâce à Google.","email":"contactfr.vitrio@gmail.com","areaServed":"FR"}</script>
 </head>
@@ -44,8 +44,9 @@
 </header>
 
 <main>
-<section class="hero" id="accueil">
+<section class="hero has-photo" id="accueil">
   <div class="wrap">
+    <div class="hero-text">
     <p class="eyebrow load" style="--d:0">Artisans · commerçants · indépendants</p>
     <h1 class="load" style="--d:1">Plus de clients qui vous trouvent, <em>plus de devis.</em></h1>
     <p class="lead load" style="--d:2">Quand quelqu'un cherche votre métier sur Google, il doit tomber sur vous, comprendre ce que vous faites et vous appeler en un geste. C'est ce que je mets en place pour vous, et vous le testez gratuitement pendant 2 semaines.</p>
@@ -53,6 +54,10 @@
       <a class="btn" href="#contact">Recevoir ma page d'essai <svg aria-hidden="true" focusable="false" class="ico arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <a class="text-link" href="#exemples">Voir des exemples</a>
     </div>
+    </div>
+    <figure class="hero-photo mock load" style="--d:3">
+      <img src="photos/apercu-ecrans.webp" alt="Exemple de page réalisée pour un plombier, affichée sur ordinateur et sur téléphone" width="1500" height="1160" fetchpriority="high">
+    </figure>
   </div>
 </section>
 
@@ -63,6 +68,18 @@
     <div><strong>48 h</strong><span>pour préparer votre page</span></div>
   </div>
 </div>
+
+<ul class="marquee" aria-label="En bref">
+  <li>Plombiers</li>
+  <li>Coiffeurs</li>
+  <li>Restaurants</li>
+  <li>Électriciens</li>
+  <li>Garages</li>
+  <li>Boulangeries</li>
+  <li>Instituts de beauté</li>
+  <li>Paysagistes</li>
+  <li>Fleuristes</li>
+</ul>
 
 <section id="constat">
   <div class="wrap">
@@ -93,8 +110,9 @@
 
 <section class="split tarifs-wrap" id="comment">
   <div class="wrap">
-    <figure class="art reveal" style="margin:0">
-      <div class="art-inner" data-parallax><span>V</span></div>
+    <figure class="art has-photo reveal" style="margin:0">
+      <img src="photos/apercu-telephone.webp" alt="Exemple de page pour un salon de coiffure, affichée sur un téléphone" width="800" height="1000" loading="lazy">
+      <figcaption>Votre page, telle que vos clients la voient sur leur téléphone</figcaption>
     </figure>
     <div class="reveal" style="--d:1">
       <div class="head" style="margin-bottom:0">
@@ -136,18 +154,41 @@
     </div>
     <div class="demos">
       <a class="demo reveal" style="--d:0" href="demos/demo-salon-elegance/index.html">
-        <img src="demos/demo-salon-elegance/og-image.jpg" alt="Aperçu de l'exemple Salon Élégance, coiffeur à Lyon" width="1200" height="630" loading="lazy">
+        <img class="long" src="demos/demo-salon-elegance/apercu-long.webp" alt="Aperçu de l'exemple Salon Élégance, coiffeur à Lyon" width="720" height="4513" loading="lazy">
+        <span class="demo-hint" aria-hidden="true">Survolez pour faire défiler</span>
         <span class="demo-meta"><strong>Coiffeur</strong><span>Style élégant · exemple fictif</span></span>
       </a>
       <a class="demo reveal" style="--d:1" href="demos/demo-table-de-margot/index.html">
-        <img src="demos/demo-table-de-margot/og-image.jpg" alt="Aperçu de l'exemple La Table de Margot, bistrot à Bordeaux" width="1200" height="630" loading="lazy">
+        <img class="long" src="demos/demo-table-de-margot/apercu-long.webp" alt="Aperçu de l'exemple La Table de Margot, bistrot à Bordeaux" width="720" height="4450" loading="lazy">
+        <span class="demo-hint" aria-hidden="true">Survolez pour faire défiler</span>
         <span class="demo-meta"><strong>Restaurant</strong><span>Style chaleureux · exemple fictif</span></span>
       </a>
       <a class="demo reveal" style="--d:2" href="demos/demo-durand-plomberie/index.html">
-        <img src="demos/demo-durand-plomberie/og-image.jpg" alt="Aperçu de l'exemple Durand Plomberie, plombier à Toulouse" width="1200" height="630" loading="lazy">
+        <img class="long" src="demos/demo-durand-plomberie/apercu-long.webp" alt="Aperçu de l'exemple Durand Plomberie, plombier à Toulouse" width="720" height="4521" loading="lazy">
+        <span class="demo-hint" aria-hidden="true">Survolez pour faire défiler</span>
         <span class="demo-meta"><strong>Plombier</strong><span>Style solide · exemple fictif</span></span>
       </a>
     </div>
+  </div>
+</section>
+
+<section id="engagements">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">Mes engagements</p>
+      <h2>Ce qui est écrit, noir sur blanc</h2>
+      <p>Ces points figurent dans les conditions de vente que vous recevez avec le devis.</p>
+    </div>
+    <ul class="pledges">
+      <li class="reveal"><svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><strong>Rien à payer pour essayer</strong><span>14 jours en ligne, sans paiement, sans engagement et sans coordonnées bancaires.</span></div></li>
+      <li class="reveal"><svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><strong>Prête en 48 h ouvrées</strong><span>Dès que j'ai vos informations : services, horaires, photos.</span></div></li>
+      <li class="reveal"><svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><strong>Deux séries de corrections incluses</strong><span>Vous relisez, je corrige, avant la mise en ligne définitive.</span></div></li>
+      <li class="reveal"><svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><strong>La page est à vous</strong><span>Une fois payée, elle vous appartient : les fichiers vous sont remis sur simple demande.</span></div></li>
+      <li class="reveal"><svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><strong>Votre nom de domaine à votre nom</strong><span>Si vous en voulez un, il est enregistré à votre nom, jamais au mien.</span></div></li>
+      <li class="reveal"><svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><strong>Vous arrêtez quand vous voulez</strong><span>L'entretien est sans engagement : un email suffit.</span></div></li>
+      <li class="reveal"><svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><strong>Vos avis, tels quels</strong><span>Uniquement vos vrais avis Google, copiés mot pour mot, avec leur date.</span></div></li>
+      <li class="reveal"><svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><strong>Aucune promesse en l'air</strong><span>Je ne garantis ni un nombre de clients ni une position dans Google. Vous jugez pendant l'essai.</span></div></li>
+    </ul>
   </div>
 </section>
 

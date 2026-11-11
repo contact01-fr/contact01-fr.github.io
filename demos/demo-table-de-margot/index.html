@@ -24,7 +24,7 @@
 <meta name="theme-color" content="#2a1610">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="preconnect" href="https://fonts.bunny.net">
-<link rel="stylesheet" href="https://fonts.bunny.net/css?family=bodoni-moda:400,500,600,400i,500i|jost:400,500,600|young-serif:400|dm-sans:400,500,600,700|archivo:400,600,800,900&display=swap">
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=young-serif:400|dm-sans:400,500,600,700&display=swap">
 <link rel="stylesheet" href="style.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Restaurant","name":"La Table de Margot","telephone":"05 00 00 00 00","servesCuisine":"Française","priceRange":"€€","address":{"@type":"PostalAddress","streetAddress":"1 quai de l'Exemple","addressLocality":"Bordeaux","postalCode":"33300","addressCountry":"FR"},"openingHours":["Tu-Sa 12:00-14:30","Tu-Sa 19:00-22:30","Su 12:00-15:00"]}
@@ -53,8 +53,9 @@
 </header>
 
 <main>
-<section class="hero" id="accueil">
+<section class="hero has-photo" id="accueil">
   <div class="wrap">
+    <div class="hero-text">
     <p class="eyebrow load" style="--d:0">Bistrot · Bordeaux Chartrons</p>
     <h1 class="load" style="--d:1">Une cuisine de marché, <em>servie</em> avec le sourire</h1>
     <p class="lead load" style="--d:2">Des produits du marché des Capucins, une carte qui change chaque semaine et des vins de petits vignerons. À deux pas des quais.</p>
@@ -63,6 +64,12 @@
       <a class="btn" href="tel:+33500000000">Réserver une table <svg aria-hidden="true" focusable="false" class="ico arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <a class="text-link" href="#tarifs">Voir la carte</a>
     </div>
+    </div>
+    <!-- PHOTO-ACCUEIL : photo réelle fournie par le commerce (ou reprise de ses réseaux avec son accord). Sans photo : retirer ce bloc et la classe has-photo. -->
+    <figure class="hero-photo load" style="--d:3">
+      <img src="photos/accueil.webp" alt="Assiette dressée sur une table du bistrot" width="1100" height="880" fetchpriority="high">
+      <figcaption class="hero-badge"><strong>4,7 <span aria-hidden="true">★</span></strong><em>312 avis Google</em></figcaption>
+    </figure>
   </div>
 </section>
 
@@ -73,6 +80,14 @@
     <div><strong data-count="40">40</strong><span>Couverts</span></div>
   </div>
 </div>
+
+<ul class="marquee" aria-label="En bref">
+  <li>Cuisine de marché</li>
+  <li>Ardoise de la semaine</li>
+  <li>Vins de petits vignerons</li>
+  <li>Desserts maison</li>
+  <li>Menu du midi</li>
+</ul>
 
 <section id="prestations">
   <div class="wrap">
@@ -112,9 +127,9 @@
 
 <section class="split" id="approche">
   <div class="wrap">
-    <figure class="art reveal" style="margin:0">
-      <div class="art-inner" data-parallax><span>M</span></div>
-      <figcaption>Emplacement de la photo de la salle</figcaption>
+    <figure class="art has-photo reveal" style="margin:0">
+      <img src="photos/artisan.webp" alt="Le chef dresse les assiettes au passe" width="800" height="1000" loading="lazy">
+      <figcaption>En cuisine, juste avant le service</figcaption>
     </figure>
     <div class="reveal" style="--d:1">
       <div class="head" style="margin-bottom:0">
@@ -127,6 +142,23 @@
         <li><svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><strong>Producteurs à moins de 80 km</strong><span>On connaît le nom de chaque maraîcher.</span></div></li>
         <li><svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><strong>Options végétariennes</strong><span>Toujours un plat sans viande ni poisson à la carte.</span></div></li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION-REALISATIONS : uniquement de vraies photos du commerce. Sans photo : supprimer la section. -->
+<section id="realisations">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">En salle et en cuisine</p>
+      <h2>Ce qui vous attend à table</h2>
+      <p>La salle, la cuisine ouverte et quelques assiettes. Les photos de cet exemple sont des illustrations.</p>
+    </div>
+    <div class="gallery">
+      <figure class="reveal" style="--d:0"><img src="photos/g1.webp" alt="Table en bois dressée avec verres et assiette" width="720" height="540" loading="lazy"><figcaption><strong>La salle</strong>40 couverts</figcaption></figure>
+      <figure class="reveal" style="--d:1"><img src="photos/g2.webp" alt="Moelleux à l'orange servi sur assiette" width="720" height="540" loading="lazy"><figcaption><strong>Dessert maison</strong>Moelleux à l'orange</figcaption></figure>
+      <figure class="reveal" style="--d:2"><img src="photos/g3.webp" alt="Cuisine ouverte avec ardoise et bocaux" width="720" height="540" loading="lazy"><figcaption><strong>La cuisine ouverte</strong>On vous voit, vous nous voyez</figcaption></figure>
+      <figure class="reveal" style="--d:3"><img src="photos/g4.webp" alt="Banquette en cuir et tables du bistrot" width="720" height="540" loading="lazy"><figcaption><strong>Le coin banquette</strong>Idéal à deux</figcaption></figure>
     </div>
   </div>
 </section>
@@ -144,21 +176,21 @@
         <button role="tab" id="tab-2" aria-controls="pan-2" aria-selected="false">Plats</button>
         <button role="tab" id="tab-3" aria-controls="pan-3" aria-selected="false">Desserts</button>
       </div>
-      <ul class="price-list" role="tabpanel" id="pan-1" aria-labelledby="tab-1">
+      <div role="tabpanel" id="pan-1" aria-labelledby="tab-1"><ul class="price-list">
         <li><span>Plat du jour</span><span class="dots"></span><span class="p">14 €</span></li>
         <li><span>Entrée + plat ou plat + dessert</span><span class="dots"></span><span class="p">17 €</span></li>
         <li><span>Entrée + plat + dessert</span><span class="dots"></span><span class="p">21 €</span></li>
-      </ul>
-      <ul class="price-list" role="tabpanel" id="pan-2" aria-labelledby="tab-2" hidden>
+      </ul></div>
+      <div role="tabpanel" id="pan-2" aria-labelledby="tab-2" hidden><ul class="price-list">
         <li><span>Maigre du bassin, beurre blanc<small>Poireaux fondants, pommes de terre de l'île de Ré</small></span><span class="dots"></span><span class="p">24 €</span></li>
         <li><span>Joue de bœuf confite au vin rouge<small>Purée maison, carottes glacées</small></span><span class="dots"></span><span class="p">22 €</span></li>
         <li><span>Risotto de petit épeautre<small>Courge rôtie, noisettes, parmesan</small></span><span class="dots"></span><span class="p">19 €</span></li>
-      </ul>
-      <ul class="price-list" role="tabpanel" id="pan-3" aria-labelledby="tab-3" hidden>
+      </ul></div>
+      <div role="tabpanel" id="pan-3" aria-labelledby="tab-3" hidden><ul class="price-list">
         <li><span>Canelé maison et crème glacée vanille</span><span class="dots"></span><span class="p">8 €</span></li>
         <li><span>Tarte fine aux pommes, caramel salé</span><span class="dots"></span><span class="p">9 €</span></li>
         <li><span>Assiette de fromages affinés</span><span class="dots"></span><span class="p">11 €</span></li>
-      </ul>
+      </ul></div>
       <p class="note">Carte d'exemple. La carte change chaque semaine selon le marché.</p>
     </div>
   </div>
@@ -178,13 +210,36 @@
       </div>
     </div>
     <div class="track reveal" style="--d:1" tabindex="0" aria-label="Avis clients">
-      <figure class="review" style="margin:0"><div class="stars" aria-label="5 étoiles">★★★★★</div><blockquote>« Exemple d'avis : sur un vrai site, l'agent reprend uniquement des avis Google réels. »</blockquote><figcaption><cite>Exemple A.</cite></figcaption></figure>
-      <figure class="review" style="margin:0"><div class="stars" aria-label="5 étoiles">★★★★★</div><blockquote>« Deuxième exemple d'avis, affiché ici pour montrer la mise en page du carrousel. »</blockquote><figcaption><cite>Exemple B.</cite></figcaption></figure>
-      <figure class="review" style="margin:0"><div class="stars" aria-label="5 étoiles">★★★★★</div><blockquote>« Troisième exemple. Faites glisser ou utilisez les flèches pour parcourir les avis. »</blockquote><figcaption><cite>Exemple C.</cite></figcaption></figure>
+      <figure class="review" style="margin:0"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>« Ardoise courte, tout est frais et bien cuisiné. Le service est aux petits soins. »</blockquote><figcaption><cite>Julien P.</cite><span class="rev-meta">Avis publié sur Google · mars 2026</span></figcaption></figure>
+      <figure class="review" style="margin:0"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>« Le meilleur menu du midi du quartier. On y retourne chaque semaine. »</blockquote><figcaption><cite>Nadia K.</cite><span class="rev-meta">Avis publié sur Google · février 2026</span></figcaption></figure>
+      <figure class="review" style="margin:0"><div class="stars" aria-label="4 étoiles sur 5">★★★★☆</div><blockquote>« Très bonne cuisine, salle un peu bruyante le vendredi soir. »</blockquote><figcaption><cite>Marc D.</cite><span class="rev-meta">Avis publié sur Google · janvier 2026</span></figcaption></figure>
     </div>
+    <p class="note rev-note">Avis d'illustration : ce commerce est fictif. Sur une vraie page, les avis sont copiés mot pour mot depuis Google, avec leur date. <a class="text-link" href="https://www.google.com/maps/search/?api=1&query=La%20Table%20de%20Margot%20Bordeaux" target="_blank" rel="noopener">Lire tous les avis sur Google</a></p>
   </div>
 </section>
 <!-- FIN-SECTION-AVIS -->
+
+<!-- SECTION-ZONE-QUESTIONS : informations et réponses confirmées par le commerce. -->
+<section class="zone-wrap" id="zone">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="head" style="margin-bottom:26px">
+        <p class="eyebrow">Bon à savoir</p>
+        <h2>Avant de réserver</h2>
+      </div>
+      <ul class="chips">
+        <li>Menu du midi en semaine</li><li>Plats végétariens</li><li>Groupes jusqu'à 12</li><li>Chiens acceptés</li><li>Carte bancaire et titres-restaurant</li>
+      </ul>
+      <p style="color:var(--c-ink-soft)">Une allergie, un anniversaire, une grande tablée ? Dites-le en réservant, on s'organise.</p>
+    </div>
+    <div class="faq reveal" style="--d:1">
+      <details open><summary>Faut-il réserver ?</summary><p>Le soir et le week-end, oui. Le midi en semaine, il reste souvent une table.</p></details>
+      <details><summary>L'ardoise change-t-elle souvent ?</summary><p>Chaque semaine, selon le marché. Elle est mise à jour ici le mardi.</p></details>
+      <details><summary>Avez-vous des plats végétariens ?</summary><p>Toujours une entrée et un plat végétariens à l'ardoise.</p></details>
+      <details><summary>Peut-on privatiser la salle ?</summary><p>Oui, jusqu'à 40 personnes, sur demande par téléphone.</p></details>
+    </div>
+  </div>
+</section>
 
 <section class="infos" id="infos">
   <div class="wrap">

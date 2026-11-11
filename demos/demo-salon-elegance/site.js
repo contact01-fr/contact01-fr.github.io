@@ -188,6 +188,164 @@
     });
   });
 
+  // ===== V3 : animations et interactions (rien ne s'active si le visiteur a demandé moins d'animations) =====
+  root.classList.add('js');
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // Les éléments apparus gardent leur transformation libre pour les effets au survol
+  $$('.reveal').forEach(el => el.addEventListener('animationend', e => { if (e.target === el) el.classList.add('done', 'seen'); }));
+  $$('.reveal').forEach(el => { if (reduce || !('IntersectionObserver' in window) || el.getBoundingClientRect().top <= innerHeight * 1.12) el.classList.add('seen'); });
+
+  // Titres : les mots montent un par un
+  if (!reduce && 'IntersectionObserver' in window) {
+    const split = el => {
+      const walk = n => [...n.childNodes].forEach(c => {
+        if (c.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          c.textContent.split(/([ \n\t]+)/).forEach(t => {
+            if (!t) return;
+            if (/^[ \n\t]+$/.test(t)) { frag.append(' '); return; }
+            const o = document.createElement('span'), i = document.createElement('span');
+            o.className = 'w'; i.textContent = t; o.append(i); frag.append(o);
+          });
+          c.replaceWith(frag);
+        } else if (c.nodeType === 1) walk(c);
+      });
+      walk(el);
+      $$('.w > span', el).forEach((w, i) => w.style.setProperty('--i', i));
+      el.classList.add('words');
+    };
+    const tio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); tio.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+    $$('.hero h1, .head h2, .final h2').forEach(el => { split(el); tio.observe(el); });
+  }
+
+  // Hero : lumière et relief qui suivent la souris
+  if (!reduce && fine && hero) {
+    const photo = $('.hero-photo', hero);
+    hero.addEventListener('pointermove', e => {
+      const r = hero.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      hero.style.setProperty('--hx', (x * 100).toFixed(1) + '%');
+      hero.style.setProperty('--hy', (y * 100).toFixed(1) + '%');
+      if (photo) { photo.style.setProperty('--ty', ((x - .5) * 9).toFixed(2) + 'deg'); photo.style.setProperty('--tx', ((.5 - y) * 7).toFixed(2) + 'deg'); }
+    });
+    hero.addEventListener('pointerleave', () => { if (photo) { photo.style.setProperty('--tx', '0deg'); photo.style.setProperty('--ty', '0deg'); } });
+  }
+
+  // Cartes, formules, exemples, avis : relief et lumière
+  $$('.plan, .review, .demo').forEach(c => c.addEventListener('pointermove', e => {
+    const r = c.getBoundingClientRect();
+    c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }));
+  if (!reduce && fine) $$('.card, .plan, .demo').forEach(c => {
+    c.addEventListener('pointermove', e => {
+      const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      c.style.setProperty('--ry', (x * 7).toFixed(2) + 'deg');
+      c.style.setProperty('--rx', (y * -7).toFixed(2) + 'deg');
+    });
+    c.addEventListener('pointerleave', () => { c.style.setProperty('--rx', '0deg'); c.style.setProperty('--ry', '0deg'); });
+  });
+
+  // Boutons principaux : légère attraction vers la souris
+  if (!reduce && fine) $$('.hero .btn, .final .btn').forEach(b => {
+    b.addEventListener('pointermove', e => {
+      const r = b.getBoundingClientRect();
+      b.style.setProperty('--bx', ((e.clientX - r.left - r.width / 2) * .18).toFixed(1) + 'px');
+      b.style.setProperty('--by', ((e.clientY - r.top - r.height / 2) * .28).toFixed(1) + 'px');
+    });
+    b.addEventListener('pointerleave', () => { b.style.setProperty('--bx', '0px'); b.style.setProperty('--by', '0px'); });
+  });
+
+  // Appel final : le halo suit la souris
+  const fin = $('.final');
+  if (!reduce && fine && fin) fin.addEventListener('pointermove', e => {
+    const r = fin.getBoundingClientRect();
+    fin.style.setProperty('--fx', ((e.clientX - r.left - r.width * .75) * .5).toFixed(0) + 'px');
+    fin.style.setProperty('--fy', ((e.clientY - r.top - r.height * .2) * .5).toFixed(0) + 'px');
+  });
+
+  // Bandeau défilant : la liste est doublée pour boucler sans coupure
+  if (!reduce) $$('.marquee').forEach(m => {
+    const items = $$('li', m);
+    const w = items.reduce((a, li) => a + li.offsetWidth, 0);
+    if (!w) return;
+    const copies = Math.ceil(innerWidth / w) + 1;
+    for (let k = 0; k < copies; k++) items.forEach(li => { const c = li.cloneNode(true); c.setAttribute('aria-hidden', 'true'); m.append(c); });
+    m.style.setProperty('--shift', '-' + w + 'px');
+    m.style.setProperty('--dur', Math.max(18, w / 45) + 's');
+    m.classList.add('run');
+  });
+
+  // Menu : rubrique en cours
+  if ('IntersectionObserver' in window) {
+    const links = $$('.nav a[href^="#"]:not(.btn)').filter(a => a.getAttribute('href').length > 1 && $(a.getAttribute('href')));
+    const spy = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      links.forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id));
+    }), { rootMargin: '-45% 0px -50% 0px' });
+    links.forEach(a => spy.observe($(a.getAttribute('href'))));
+  }
+
+  // Questions fréquentes : ouverture et fermeture en douceur
+  if (!reduce) $$('.faq details').forEach(d => {
+    const sum = $('summary', d);
+    sum.addEventListener('click', e => {
+      e.preventDefault();
+      const from = d.offsetHeight;
+      if (d.open) {
+        const a = d.animate({ height: [from + 'px', sum.offsetHeight + 'px'] }, { duration: 320, easing: 'cubic-bezier(.2,.7,.2,1)' });
+        a.onfinish = () => { d.open = false; };
+      } else {
+        d.open = true;
+        d.animate({ height: [from + 'px', d.offsetHeight + 'px'] }, { duration: 380, easing: 'cubic-bezier(.2,.7,.2,1)' });
+      }
+    });
+  });
+
+  // Avis : glisser à la souris
+  if (track && fine) {
+    let down = false, x0 = 0, s0 = 0;
+    track.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; x0 = e.clientX; s0 = track.scrollLeft; track.setPointerCapture(e.pointerId); track.classList.add('drag'); });
+    track.addEventListener('pointermove', e => { if (down) track.scrollLeft = s0 - (e.clientX - x0); });
+    const up = () => { down = false; track.classList.remove('drag'); };
+    track.addEventListener('pointerup', up); track.addEventListener('pointercancel', up);
+  }
+
+  // Réalisations : agrandissement au clic, flèches du clavier, Échap pour fermer
+  const figs = $$('.gallery figure');
+  if (figs.length && 'showModal' in document.createElement('dialog')) {
+    const dlg = document.createElement('dialog');
+    dlg.className = 'lightbox';
+    dlg.setAttribute('aria-label', 'Photo agrandie');
+    dlg.innerHTML = '<img alt=""><div class="lb-bar"><div><strong></strong><span></span></div><div class="lb-btns"><button type="button" data-lb="-1" aria-label="Photo précédente">‹</button><button type="button" data-lb="1" aria-label="Photo suivante">›</button><button type="button" data-lb="0" aria-label="Fermer">×</button></div></div>';
+    document.body.append(dlg);
+    let cur = 0;
+    const show = i => {
+      cur = (i + figs.length) % figs.length;
+      const img = $('img', figs[cur]), cap = $('figcaption', figs[cur]), st = cap && $('strong', cap);
+      $('img', dlg).src = img.currentSrc || img.src;
+      $('img', dlg).alt = img.alt;
+      $('strong', dlg).textContent = st ? st.textContent : '';
+      $('.lb-bar span', dlg).textContent = cap ? cap.textContent.replace(st ? st.textContent : '', '').trim() : '';
+    };
+    const zooms = figs.map((f, i) => {
+      const z = document.createElement('button');
+      z.type = 'button';
+      z.className = 'zoom';
+      z.setAttribute('aria-label', 'Agrandir la photo : ' + ($('img', f).alt || ''));
+      z.addEventListener('click', () => { show(i); dlg.showModal(); });
+      f.append(z);
+      return z;
+    });
+    dlg.addEventListener('click', e => {
+      const b = e.target.closest('[data-lb]');
+      if (b) { const d = +b.dataset.lb; if (d) show(cur + d); else dlg.close(); }
+      else if (e.target === dlg) dlg.close();
+    });
+    dlg.addEventListener('keydown', e => { if (e.key === 'ArrowRight') show(cur + 1); if (e.key === 'ArrowLeft') show(cur - 1); });
+    dlg.addEventListener('close', () => zooms[cur].focus());
+  }
+
   // Cookies : uniquement si un outil de statistiques est configuré
   const M = SITE.mesure;
   const KEY = 'vitrio-consentement';
