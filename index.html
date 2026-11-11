@@ -22,7 +22,8 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="preconnect" href="https://fonts.bunny.net">
 <link rel="stylesheet" href="https://fonts.bunny.net/css?family=archivo:400,600,800,900&display=swap">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20261111c">
+<link rel="stylesheet" href="vitrio.css?v=20261111c">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Vitrio","description":"Aide les artisans et commerçants à avoir plus de clients et de demandes de devis grâce à Google.","email":"contactfr.vitrio@gmail.com","areaServed":"FR"}</script>
 </head>
 <body>
@@ -55,8 +56,10 @@
       <a class="text-link" href="#exemples">Voir des exemples</a>
     </div>
     </div>
-    <figure class="hero-photo mock load" style="--d:3">
-      <img src="photos/apercu-ecrans.webp" alt="Exemple de page réalisée pour un plombier, affichée sur ordinateur et sur téléphone" width="1500" height="1160" fetchpriority="high">
+    <figure class="hero-scene" aria-label="Exemple de page réalisée pour un plombier, sur ordinateur et sur téléphone">
+      <div class="plane p-desk"><img src="photos/ecran-ordinateur.webp" alt="" width="1300" height="856" fetchpriority="high"></div>
+      <div class="plane p-phone"><img src="photos/ecran-telephone.webp" alt="" width="358" height="742"></div>
+      <p class="spark" aria-hidden="true"><i></i>Appel en un geste</p>
     </figure>
   </div>
 </section>
@@ -104,6 +107,76 @@
         <h3>Votre travail mérite d'être vu</h3>
         <p>Vos avis, vos réalisations, votre savoir-faire : tout ce qui rassure un nouveau client, au bon endroit.</p>
       </article>
+    </div>
+    <div class="compare reveal">
+      <img src="demos/demo-durand-plomberie/apercu.jpg" alt="Avec une page : photo, note, services et bouton d'appel visibles tout de suite" width="1200" height="630" loading="lazy">
+      <div class="before" aria-hidden="true">
+        <div class="listing">
+          <strong>Durand Plomberie</strong>
+          <span>Plombier · Toulouse</span>
+          <div class="row">Site web : aucun</div>
+          <div class="row">Horaires : non renseignés</div>
+          <div class="bars"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <span class="tag t1" aria-hidden="true">Sans page</span>
+      <span class="tag t2" aria-hidden="true">Avec votre page</span>
+      <div class="handle" aria-hidden="true"></div>
+      <input type="range" min="0" max="100" value="50" step="1" aria-label="Comparer sans page et avec une page : déplacez le curseur">
+    </div>
+    <p class="compare-note">Faites glisser le curseur. Exemple fictif : à gauche, ce qu'un client trouve quand un commerce n'a pas de page ; à droite, la même entreprise avec sa page.</p>
+  </div>
+</section>
+
+<section id="essayer">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">Essayez tout de suite</p>
+      <h2>Tapez le nom de votre commerce</h2>
+      <p>Regardez le téléphone : il se met à jour pendant que vous écrivez. Rien n'est envoyé ni enregistré.</p>
+    </div>
+    <div class="try">
+      <form class="try-form reveal" autocomplete="off">
+        <label class="txt">Le nom de votre commerce<input type="text" name="nom" maxlength="40" placeholder="Ex : Salon Élégance"></label>
+        <label class="txt">Votre ville<input type="text" name="ville" maxlength="30" placeholder="Ex : Angers"></label>
+        <fieldset>
+          <legend>Votre métier</legend>
+          <div class="opts">
+            <label><input type="radio" name="metier" value="coiffeur" checked><span>Coiffure, beauté</span></label>
+            <label><input type="radio" name="metier" value="restaurant"><span>Restaurant, commerce de bouche</span></label>
+            <label><input type="radio" name="metier" value="artisan"><span>Artisan, dépannage</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Votre couleur</legend>
+          <div class="opts sw">
+            <label><input type="radio" name="couleur" value="#8a4e77" checked><span style="--sw:#8a4e77"></span><span class="hp">Prune</span></label>
+            <label><input type="radio" name="couleur" value="#b0442b"><span style="--sw:#b0442b"></span><span class="hp">Terracotta</span></label>
+            <label><input type="radio" name="couleur" value="#1f5fbf"><span style="--sw:#1f5fbf"></span><span class="hp">Bleu</span></label>
+            <label><input type="radio" name="couleur" value="#1e6b52"><span style="--sw:#1e6b52"></span><span class="hp">Vert</span></label>
+            <label><input type="radio" name="couleur" value="#a8662a"><span style="--sw:#a8662a"></span><span class="hp">Caramel</span></label>
+            <label><input type="radio" name="couleur" value="#2b3a4a"><span style="--sw:#2b3a4a"></span><span class="hp">Ardoise</span></label>
+          </div>
+        </fieldset>
+        <div>
+          <button class="btn" type="button" data-try-send>Recevoir cette page pour de vrai <svg aria-hidden="true" focusable="false" class="ico arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <p class="try-note">Aperçu simplifié, avec une photo d'illustration. Votre vraie page est faite avec vos informations, vos photos et vos avis.</p>
+      </form>
+      <div class="phone-wrap reveal" style="--d:1">
+        <div class="phone" role="img" aria-label="Aperçu de votre page sur un téléphone">
+          <div class="screen" aria-hidden="true">
+            <div class="top"><span>Salon Élégance</span><i></i></div>
+            <div class="mid">
+              <p class="eb">Coiffeur</p>
+              <p class="h">L'art de la coupe, chez Salon Élégance</p>
+              <span class="cta">Prendre rendez-vous</span>
+              <div class="ph"><img src="demos/demo-salon-elegance/photos/accueil.webp" alt="" width="1100" height="880" loading="lazy"><span class="bd"><b>★</b> Vos avis Google</span></div>
+            </div>
+            <div class="tags"><span>Coupe</span><span>Couleur</span><span>Balayage</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -199,11 +272,16 @@
       <h2>Des prix faits pour les petites entreprises</h2>
       <p>Vous ne payez rien pendant les 2 semaines d'essai. Ensuite, seulement si vous voulez garder votre page.</p>
     </div>
+    <div class="pay reveal" role="group" aria-label="Mode de paiement">
+      <i aria-hidden="true"></i>
+      <button type="button" aria-pressed="true">En 1 fois</button>
+      <button type="button" aria-pressed="false">En 3 fois sans frais</button>
+    </div>
     <div class="plans">
-      <article class="plan reveal" style="--d:0">
+      <article class="plan star reveal" style="--d:0">
         <h3>Essentiel</h3>
         <p class="plan-for">Indépendants et activités qui démarrent</p>
-        <p class="amount">190 €</p>
+        <p class="amount" data-prix="190">190 €</p>
         <p class="plan-sub">une seule fois, ou en 3 fois sans frais</p>
         <ul><li>Une page complète</li><li>Services, horaires, avis Google</li><li>Appel et itinéraire en un geste</li><li>Demande de devis</li></ul>
         <p class="plan-after">Puis entretien dès 29 €/mois</p>
@@ -211,7 +289,7 @@
       <article class="plan reveal" style="--d:1">
         <h3>Standard</h3>
         <p class="plan-for">Commerces et artisans installés</p>
-        <p class="amount">390 €</p>
+        <p class="amount" data-prix="390">390 €</p>
         <p class="plan-sub">une seule fois, ou en 3 fois sans frais</p>
         <ul><li>Tout l'Essentiel</li><li>Tarifs détaillés</li><li>Votre savoir-faire et vos photos</li><li>Image de partage sur les réseaux</li></ul>
         <p class="plan-after">Puis entretien dès 49 €/mois</p>
@@ -219,7 +297,7 @@
       <article class="plan reveal" style="--d:2">
         <h3>Complet</h3>
         <p class="plan-for">Plusieurs activités ou plusieurs services</p>
-        <p class="amount">590 €</p>
+        <p class="amount" data-prix="590">590 €</p>
         <p class="plan-sub">une seule fois, ou en 3 fois sans frais</p>
         <ul><li>Tout le Standard</li><li>Une page par service</li><li>Galerie de réalisations</li></ul>
         <p class="plan-after">Puis entretien dès 49 €/mois</p>
@@ -292,6 +370,7 @@
 
 
 <script>window.SITE = { horaires: {}, mesure: null };</script>
-<script src="site.js" defer></script>
+<script src="site.js?v=20261111c" defer></script>
+<script src="vitrio.js?v=20261111c" defer></script>
 </body>
 </html>
