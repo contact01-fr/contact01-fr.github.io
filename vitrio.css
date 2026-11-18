@@ -1,10 +1,6 @@
 /* ===== Site Vitrio : effets propres au site de l'agence (en plus de style.css) =====
    Rien ici n'est nécessaire pour lire la page. Tout s'arrête avec prefers-reduced-motion. */
 
-/* Titre : dégradé qui glisse sur les mots mis en avant */
-.hero h1 em, .hero h1 em .w > span { background: linear-gradient(100deg, #d4ece2 0%, #7fe3b5 35%, #f3f0c9 60%, #d4ece2 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 7s linear infinite; }
-@keyframes shine { to { background-position: -220% 0; } }
-
 /* Accueil : ordinateur et téléphone sur deux plans, en relief */
 .hero-scene { position: relative; margin: 0; aspect-ratio: 1500 / 1160; perspective: 1400px; min-width: 0; }
 .hero-scene .plane { position: absolute; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.2, .7, .2, 1); will-change: transform; filter: drop-shadow(0 34px 44px rgba(0, 0, 0, .5)); }

@@ -237,7 +237,7 @@
     c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
     c.style.setProperty('--my', (e.clientY - r.top) + 'px');
   }));
-  if (!reduce && fine) $$('.card, .plan, .demo').forEach(c => {
+  if (!reduce && fine) $$('.demo').forEach(c => {
     c.addEventListener('pointermove', e => {
       const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
       c.style.setProperty('--ry', (x * 7).toFixed(2) + 'deg');
@@ -345,6 +345,20 @@
     dlg.addEventListener('keydown', e => { if (e.key === 'ArrowRight') show(cur + 1); if (e.key === 'ArrowLeft') show(cur - 1); });
     dlg.addEventListener('close', () => zooms[cur].focus());
   }
+
+  // ===== V4 : récit au défilement =====
+  $$('.story').forEach(st => {
+    const steps = $$('.story-steps li', st), imgs = $$('.story-media img', st), bars = $$('.story-bar i', st);
+    const set = k => {
+      steps.forEach((li, i) => li.classList.toggle('on', i === k));
+      imgs.forEach((im, i) => im.classList.toggle('on', i === k));
+      bars.forEach((b, i) => b.classList.toggle('done', i <= k));
+    };
+    set(0);
+    if (!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) set(steps.indexOf(e.target)); }), { rootMargin: '-45% 0px -45% 0px' });
+    steps.forEach(li => io.observe(li));
+  });
 
   // Cookies : uniquement si un outil de statistiques est configuré
   const M = SITE.mesure;

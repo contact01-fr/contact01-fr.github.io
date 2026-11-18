@@ -453,3 +453,52 @@ html.js .gallery figure:hover::after, html.js .gallery figure:focus-within::afte
 /* Appel final : halo qui suit la souris */
 .final::before { translate: var(--fx, 0) var(--fy, 0); transition: translate 1.2s var(--ease); }
 .trust strong span { font-size: inherit; color: inherit; }
+
+/* ===== V4 (18/11/2026) : sobriété « site de marque » + récit au défilement =====
+   Moins d'effets partout, un moment fort par page : le récit en défilement (.story). */
+.eyebrow { text-transform: none; letter-spacing: .01em; font-size: 15px; font-weight: 600; }
+.head .eyebrow::before, .hero .eyebrow::before, .final .eyebrow::before { content: none; }
+.btn .ico.arrow { display: none; }
+.hero h1 em { color: inherit; }
+@media (hover: hover) and (pointer: fine) {
+  .card:hover, .plan:hover { transform: translateY(-3px); transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .5s; }
+}
+.card:hover .ic { transform: none; }
+
+/* Récit au défilement : l'image reste fixe, les étapes défilent à côté */
+.story { background: var(--c-surface); border-block: 1px solid var(--c-line); }
+.story-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.story-media { position: sticky; top: 14vh; height: 72vh; border-radius: calc(var(--radius) + 4px); overflow: hidden; background: var(--c-hero); }
+.story-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity .9s var(--ease), transform 1.6s var(--ease); }
+.story-media img.on { opacity: 1; transform: none; }
+.story-bar { position: absolute; left: 18px; right: 18px; bottom: 18px; display: flex; gap: 6px; z-index: 1; }
+.story-bar i { flex: 1; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, .35); overflow: hidden; }
+.story-bar i::after { content: ""; display: block; height: 100%; background: #fff; transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease); }
+.story-bar i.done::after { transform: none; }
+.story-steps { list-style: none; margin: 0; padding: 0; }
+.story-steps li { min-height: 62vh; display: grid; align-content: center; gap: 14px; opacity: .3; transition: opacity .6s var(--ease); }
+.story-steps li.on { opacity: 1; }
+.story-steps li:first-child { min-height: 50vh; align-content: start; padding-top: 10vh; }
+.story-steps li:last-child { min-height: 70vh; }
+.story-n { font-family: var(--f-display); font-weight: var(--display-weight); font-size: 15px; color: var(--c-accent); }
+.story-steps h3 { font-size: clamp(30px, 3.6vw, 46px); }
+.story-steps p { color: var(--c-ink-soft); font-size: 18px; max-width: 34ch; }
+.story-inline { display: none; }
+@media (max-width: 860px) {
+  .story-grid { grid-template-columns: 1fr; }
+  .story-media { display: none; }
+  .story-steps li, .story-steps li:first-child, .story-steps li:last-child { min-height: 0; padding: 0 0 44px; opacity: 1; }
+  .story-inline { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); margin-bottom: 6px; }
+}
+@media (prefers-reduced-motion: reduce) { .story-steps li { opacity: 1; } .story-media img { transform: none; } }
+
+/* Accueil plein écran (variante .full) : la photo occupe tout l'en-tête */
+.hero.full { min-height: 100svh; display: grid; align-items: end; background: var(--c-hero); }
+.hero.full > .wrap { width: 100%; grid-template-columns: 1fr; padding-block: 140px 72px; }
+.hero.full .hero-text { max-width: 620px; }
+.hero.full .hero-photo { position: absolute; inset: 0; z-index: -1; perspective: none; }
+.hero.full .hero-photo img { width: 100%; height: 100%; aspect-ratio: auto; border-radius: 0; box-shadow: none; transform: none; animation: slowzoom 18s ease-out both; }
+.hero.full .hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in srgb, var(--c-hero) 88%, transparent) 0%, color-mix(in srgb, var(--c-hero) 55%, transparent) 55%, transparent 100%), linear-gradient(0deg, color-mix(in srgb, var(--c-hero) 70%, transparent), transparent 45%); }
+.hero.full .hero-badge { left: auto; right: max(20px, calc((100vw - 1180px) / 2 + 20px)); bottom: 72px; position: absolute; z-index: 1; }
+@keyframes slowzoom { from { transform: scale(1.12); } to { transform: scale(1); } }
+@media (max-width: 860px) { .hero.full .hero-badge { display: none; } }
