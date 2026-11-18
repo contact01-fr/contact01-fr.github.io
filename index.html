@@ -22,8 +22,8 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="preconnect" href="https://fonts.bunny.net">
 <link rel="stylesheet" href="https://fonts.bunny.net/css?family=archivo:400,600,800,900&display=swap">
-<link rel="stylesheet" href="style.css?v=20261118c">
-<link rel="stylesheet" href="vitrio.css?v=20261118c">
+<link rel="stylesheet" href="style.css?v=20261118e">
+<link rel="stylesheet" href="vitrio.css?v=20261118e">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Vitrio","description":"Aide les artisans et commerçants à avoir plus de clients et de demandes de devis grâce à Google.","email":"contactfr.vitrio@gmail.com","areaServed":"FR"}</script>
 </head>
 <body>
@@ -166,26 +166,33 @@
 <section class="tarifs-wrap" id="exemples">
   <div class="wrap">
     <div class="head reveal">
-      <p class="eyebrow">Exemples</p>
       <h2>À quoi ça ressemble</h2>
-      <p>Trois exemples, pour trois métiers différents. Ces commerces sont fictifs : votre page sera faite avec vos vraies informations.</p>
+      <p>Trois exemples, pour trois métiers. Ces commerces sont fictifs : votre page sera faite avec vos vraies informations.</p>
     </div>
-    <div class="demos">
-      <a class="demo reveal" style="--d:0" href="demos/demo-salon-elegance/index.html">
-        <img class="long" src="demos/demo-salon-elegance/apercu-long.webp" alt="Aperçu de l'exemple Salon Élégance, coiffeur à Lyon" width="720" height="4513" loading="lazy">
-        <span class="demo-hint" aria-hidden="true">Survolez pour faire défiler</span>
-        <span class="demo-meta"><strong>Coiffeur</strong><span>Style élégant · exemple fictif</span></span>
-      </a>
-      <a class="demo reveal" style="--d:1" href="demos/demo-table-de-margot/index.html">
-        <img class="long" src="demos/demo-table-de-margot/apercu-long.webp" alt="Aperçu de l'exemple La Table de Margot, bistrot à Bordeaux" width="720" height="4450" loading="lazy">
-        <span class="demo-hint" aria-hidden="true">Survolez pour faire défiler</span>
-        <span class="demo-meta"><strong>Restaurant</strong><span>Style chaleureux · exemple fictif</span></span>
-      </a>
-      <a class="demo reveal" style="--d:2" href="demos/demo-durand-plomberie/index.html">
-        <img class="long" src="demos/demo-durand-plomberie/apercu-long.webp" alt="Aperçu de l'exemple Durand Plomberie, plombier à Toulouse" width="720" height="4521" loading="lazy">
-        <span class="demo-hint" aria-hidden="true">Survolez pour faire défiler</span>
-        <span class="demo-meta"><strong>Plombier</strong><span>Style solide · exemple fictif</span></span>
-      </a>
+    <div class="vitrine reveal" data-vitrine>
+      <div class="vt-tabs" role="tablist" aria-label="Exemples de pages">
+        <button type="button" role="tab" id="vt-coiffeur" aria-controls="vp-coiffeur" aria-selected="true"><span>Coiffeur</span><i aria-hidden="true"></i></button>
+        <button type="button" role="tab" id="vt-restaurant" aria-controls="vp-restaurant" aria-selected="false" tabindex="-1"><span>Restaurant</span><i aria-hidden="true"></i></button>
+        <button type="button" role="tab" id="vt-plombier" aria-controls="vp-plombier" aria-selected="false" tabindex="-1"><span>Plombier</span><i aria-hidden="true"></i></button>
+      </div>
+      <div class="vt-window">
+        <div class="vt-bar" aria-hidden="true"><b></b><b></b><b></b><span></span></div>
+        <div class="vt-stage">
+        <div class="vt-panel on" role="tabpanel" id="vp-coiffeur" aria-labelledby="vt-coiffeur">
+          <img src="demos/demo-salon-elegance/apercu-long.webp" alt="Aperçu de l'exemple Salon Élégance, coiffeur à Lyon" width="720" height="5457" loading="lazy">
+          <p class="vt-cap"><span>Salon Élégance, Lyon · exemple fictif</span><a class="text-link" href="demos/demo-salon-elegance/index.html">Ouvrir l'exemple en entier</a></p>
+        </div>
+        <div class="vt-panel" role="tabpanel" id="vp-restaurant" aria-labelledby="vt-restaurant" hidden>
+          <img src="demos/demo-table-de-margot/apercu-long.webp" alt="Aperçu de l'exemple La Table de Margot, bistrot à Bordeaux" width="720" height="5313" loading="lazy">
+          <p class="vt-cap"><span>La Table de Margot, Bordeaux · exemple fictif</span><a class="text-link" href="demos/demo-table-de-margot/index.html">Ouvrir l'exemple en entier</a></p>
+        </div>
+        <div class="vt-panel" role="tabpanel" id="vp-plombier" aria-labelledby="vt-plombier" hidden>
+          <img src="demos/demo-durand-plomberie/apercu-long.webp" alt="Aperçu de l'exemple Durand Plomberie, plombier à Toulouse" width="720" height="5530" loading="lazy">
+          <p class="vt-cap"><span>Durand Plomberie, Toulouse · exemple fictif</span><a class="text-link" href="demos/demo-durand-plomberie/index.html">Ouvrir l'exemple en entier</a></p>
+        </div>
+        </div>
+      </div>
+      <button type="button" class="vt-pause text-link" data-vt-pause aria-pressed="false">Mettre en pause</button>
     </div>
   </div>
 </section>
@@ -392,7 +399,7 @@
 
 
 <script>window.SITE = { horaires: {}, mesure: null };</script>
-<script src="site.js?v=20261118c" defer></script>
-<script src="vitrio.js?v=20261118c" defer></script>
+<script src="site.js?v=20261118e" defer></script>
+<script src="vitrio.js?v=20261118e" defer></script>
 </body>
 </html>

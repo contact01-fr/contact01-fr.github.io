@@ -190,11 +190,64 @@
     f.addEventListener('submit', e => e.preventDefault());
     run();
   });
-  // Exemples sur téléphone : la page défile toute seule dans la vignette quand elle apparaît
-  if (!fine && !reduce && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver(es => es.forEach(e => {
-      e.target.classList.toggle('pan', e.isIntersecting);
-    }), { threshold: .6 });
-    $$('.demo img.long').forEach(im => io.observe(im));
-  }
+  // Vitrine des exemples : un seul exemple affiché ; il défile quand il est devant le visiteur, puis passe au suivant
+  $$('[data-vitrine]').forEach(v => {
+    const tabs = $$('[role="tab"]', v), panels = $$('.vt-panel', v), pauseBtn = $('[data-vt-pause]', v);
+    const DUR = 11000;
+    let cur = 0, visible = false, paused = false, timer = 0, t0 = 0, raf = 0;
+    const img = i => $('img', panels[i]);
+    const stopAnim = () => {
+      clearTimeout(timer); cancelAnimationFrame(raf);
+      panels.forEach((p, i) => { const im = img(i); im.classList.remove('run'); im.style.transitionDuration = ''; });
+    };
+    const progress = () => {
+      const p = Math.min(1, (performance.now() - t0) / DUR);
+      tabs[cur].style.setProperty('--vp', p.toFixed(3));
+      if (p < 1) raf = requestAnimationFrame(progress);
+    };
+    const play = () => {
+      stopAnim();
+      tabs.forEach((t, i) => t.style.setProperty('--vp', i === cur ? '0' : '0'));
+      if (reduce || paused || !visible) { tabs[cur].style.setProperty('--vp', '1'); return; }
+      const im = img(cur);
+      void im.offsetWidth;
+      im.style.setProperty('--vt-dur', DUR / 1000 + 's');
+      im.classList.add('run');
+      t0 = performance.now(); raf = requestAnimationFrame(progress);
+      timer = setTimeout(() => show((cur + 1) % panels.length), DUR + 900);
+    };
+    const show = (i, focus) => {
+      cur = i;
+      tabs.forEach((t, j) => { t.setAttribute('aria-selected', j === i); t.tabIndex = j === i ? 0 : -1; });
+      panels.forEach((p, j) => { p.classList.toggle('on', j === i); p.hidden = j !== i; });
+      if (focus) tabs[i].focus();
+      play();
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => show(i));
+      t.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); show((cur + (e.key === 'ArrowRight' ? 1 : panels.length - 1)) % panels.length, true); }
+      });
+    });
+    if (pauseBtn) pauseBtn.addEventListener('click', () => {
+      paused = !paused;
+      pauseBtn.setAttribute('aria-pressed', paused);
+      pauseBtn.textContent = paused ? 'Reprendre' : 'Mettre en pause';
+      play();
+    });
+    // glisser du doigt pour changer d'exemple
+    const stage = $('.vt-stage', v);
+    let x0 = null;
+    stage.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) > 50) show((cur + (dx < 0 ? 1 : panels.length - 1)) % panels.length);
+    });
+    // ne s'anime que quand la vitrine est devant le visiteur
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => { visible = e.isIntersecting; play(); }, { threshold: .3 }).observe(stage);
+    } else { visible = true; }
+    show(0);
+  });
 })();
