@@ -190,4 +190,11 @@
     f.addEventListener('submit', e => e.preventDefault());
     run();
   });
+  // Exemples sur téléphone : la page défile toute seule dans la vignette quand elle apparaît
+  if (!fine && !reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      e.target.classList.toggle('pan', e.isIntersecting);
+    }), { threshold: .6 });
+    $$('.demo img.long').forEach(im => io.observe(im));
+  }
 })();

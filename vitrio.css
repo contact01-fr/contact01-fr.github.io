@@ -134,3 +134,5 @@
   }
 }
 @media (prefers-reduced-motion: reduce) { .cursor { display: none; } }
+
+.demo img.long.pan { object-position: 50% 100%; transition: object-position 9s linear; }
