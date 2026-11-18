@@ -168,4 +168,26 @@
     addEventListener('resize', () => select(btns.findIndex(b => b.getAttribute('aria-pressed') === 'true')));
     if (document.fonts) document.fonts.ready.then(() => select(btns.findIndex(b => b.getAttribute('aria-pressed') === 'true')));
   }
+  // Calculateur : combien de clients pour rembourser la page et l'entretien (aucune donnée envoyée)
+  $$('[data-calc]').forEach(f => {
+    const out = { page: $('[data-c="page"]', f), mois: $('[data-c="mois"]', f) };
+    const run = () => {
+      const d = new FormData(f), v = Math.max(1, Math.min(100000, +d.get('panier') || 0));
+      const [creation, entretien] = String(d.get('f') || '390|39').split('|').map(Number);
+      const vals = { page: Math.ceil(creation / v), mois: Math.ceil(entretien / v) };
+      Object.keys(vals).forEach(k => {
+        if (out[k].textContent !== String(vals[k])) {
+          out[k].textContent = vals[k];
+          if (!reduce) { out[k].classList.remove('bump'); void out[k].offsetWidth; out[k].classList.add('bump'); }
+        }
+      });
+      const s = out.mois.nextSibling;
+      if (s && s.nodeType === 3) s.textContent = vals.mois > 1 ? ' clients par mois' : ' client par mois';
+      const t = out.page.nextSibling;
+      if (t && t.nodeType === 3) t.textContent = vals.page > 1 ? ' clients' : ' client';
+    };
+    f.addEventListener('input', run);
+    f.addEventListener('submit', e => e.preventDefault());
+    run();
+  });
 })();

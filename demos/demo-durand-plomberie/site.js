@@ -360,6 +360,31 @@
     steps.forEach(li => io.observe(li));
   });
 
+  // ===== V5 : formulaire de devis en étapes =====
+  $$('form[data-steps]').forEach(f => {
+    const steps = $$('fieldset.step', f), label = $('[data-step-label]', f), track = $('.step-track i', f);
+    let k = 0;
+    const show = n => {
+      k = n;
+      steps.forEach((s, i) => { s.hidden = i !== k; });
+      if (label) label.textContent = 'Étape ' + (k + 1) + ' sur ' + steps.length;
+      if (track) track.style.setProperty('--sp', ((k + 1) / steps.length).toFixed(3));
+    };
+    const valid = s => {
+      let ok = true;
+      $$('[data-required-group]', s).forEach(g => {
+        const err = $('.err', g), has = !!$('input:checked', g);
+        if (err) err.textContent = has ? '' : (g.dataset.requiredGroup || 'Choisissez une réponse.');
+        if (!has) { ok = false; const first = $('input', g); if (first) first.focus(); }
+      });
+      return ok;
+    };
+    $$('[data-next]', f).forEach(b => b.addEventListener('click', () => { if (valid(steps[k])) { show(Math.min(k + 1, steps.length - 1)); const t = $('input, textarea', steps[k]); if (t) t.focus(); } }));
+    $$('[data-back]', f).forEach(b => b.addEventListener('click', () => show(Math.max(0, k - 1))));
+    $$('[data-required-group] input', f).forEach(i => i.addEventListener('change', () => { const e = $('.err', i.closest('[data-required-group]')); if (e) e.textContent = ''; }));
+    show(0);
+  });
+
   // Cookies : uniquement si un outil de statistiques est configuré
   const M = SITE.mesure;
   const KEY = 'vitrio-consentement';

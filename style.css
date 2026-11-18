@@ -502,3 +502,20 @@ html.js .gallery figure:hover::after, html.js .gallery figure:focus-within::afte
 .hero.full .hero-badge { left: auto; right: max(20px, calc((100vw - 1180px) / 2 + 20px)); bottom: 72px; position: absolute; z-index: 1; }
 @keyframes slowzoom { from { transform: scale(1.12); } to { transform: scale(1); } }
 @media (max-width: 860px) { .hero.full .hero-badge { display: none; } }
+
+/* ===== V5 : formulaire de devis en 3 étapes (form[data-steps]) ===== */
+.step-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; font-size: 14px; color: var(--c-ink-soft); }
+.step-track { flex: 1; height: 4px; border-radius: 2px; background: var(--c-line); overflow: hidden; }
+.step-track i { display: block; height: 100%; background: var(--c-accent); transform-origin: left; transform: scaleX(var(--sp, .33)); transition: transform .5s var(--ease); }
+form[data-steps] fieldset.step { border: 0; margin: 0; padding: 0; display: grid; gap: 14px; }
+form[data-steps] fieldset.step:not([hidden]) { animation: fade .4s var(--ease); }
+form[data-steps] legend { font-family: var(--f-display); font-weight: var(--display-weight); font-size: 22px; padding: 0; margin-bottom: 6px; }
+.choice { display: flex; flex-wrap: wrap; gap: 8px; }
+.choice label { position: relative; cursor: pointer; }
+.choice input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.choice span { display: block; padding: 11px 16px; border-radius: 999px; border: 1px solid var(--c-line); background: var(--c-surface); font-size: 15px; transition: background .25s, color .25s, border-color .25s; }
+.choice input:checked + span { background: var(--c-accent); border-color: var(--c-accent); color: var(--c-on-accent); }
+.choice input:focus-visible + span { outline: 2px solid var(--c-accent); outline-offset: 3px; }
+.step-nav { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 6px; }
+.step-nav .back { background: none; border: 0; padding: 8px 0; font: inherit; color: var(--c-ink-soft); text-decoration: underline; cursor: pointer; }
+form[data-steps] fieldset.step[hidden] { display: none; }
